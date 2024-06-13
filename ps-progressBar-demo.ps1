@@ -9,6 +9,9 @@ $job = Start-Job -ScriptBlock {
 
 writeProgress $job "my job" "doing job" 0
 
+$result = $job | Receive-Job
+Write-Host "Result: [$result]"
+
 function writeProgress
 {
     param(
@@ -41,7 +44,4 @@ function writeProgress
     
     Write-Host
     Write-Host "----------------------------[$activityName completed]----------------------------"
-
-    $result = $job | Receive-Job
-    Write-Host "Result: [$result]"
 }
