@@ -3,6 +3,8 @@ $job = Start-Job -ScriptBlock {
     {
         Start-Sleep -s 1
     }
+
+    return "myResult"
 }
 
 writeProgress $job "my job" "doing job" 0
@@ -39,4 +41,7 @@ function writeProgress
     
     Write-Host
     Write-Host "----------------------------[$activityName completed]----------------------------"
+
+    $result = $job | Receive-Job
+    Write-Host "Result: [$result]"
 }
