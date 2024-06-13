@@ -1,5 +1,5 @@
 $job = Start-Job -ScriptBlock { 
-    for ($i = 0; $i -lt 3; $i++)
+    for ($i = 0; $i -lt 5; $i++)
     {
         Start-Sleep -s 1
     }
@@ -21,7 +21,7 @@ function writeProgress
         [bool] $clearHost
     )
 
-    while($job.State -ne "Completed")
+    while($job.State -eq "Running")
     {
 
         if ($clearHost)
@@ -29,8 +29,8 @@ function writeProgress
             Clear-Host
         }
 
-        Write-Host -NoNewline "$progressText ."    
-
+        Write-Host -NoNewline "$progressText "
+        Write-Host  -NoNewline "."
         Start-Sleep -s 0.5
         Write-Host  -NoNewline "."
         Start-Sleep -s 0.5
